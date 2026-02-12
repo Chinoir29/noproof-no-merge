@@ -1,0 +1,33 @@
+name: ICP interview (15 min)
+description: Quick interview request about PR proof standards.
+title: "[ICP] <role> — interview request"
+labels: []
+body:
+  - type: input
+    id: role
+    attributes:
+      label: Your role
+      placeholder: CTO / Head of Eng / Tech Lead / Dev
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Current PR workflow (short)
+      placeholder: How do you review PRs today? What is considered "enough proof"?
+    validations:
+      required: true
+  - type: textarea
+    id: objections
+    attributes:
+      label: Biggest objection
+      placeholder: "Already covered by CI", "Too much friction", etc.
+    validations:
+      required: true
+  - type: input
+    id: slot
+    attributes:
+      label: Best slot(s)
+      placeholder: 2–3 time options
+    validations:
+      required: false
