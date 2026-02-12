@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions (Q&A)
+    url: https://github.com/Chinoir29/noproof-no-merge/discussions
+    about: Ask questions or propose interview slots.
