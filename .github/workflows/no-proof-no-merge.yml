@@ -1,0 +1,41 @@
+name: No-Proof-No-Merge
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  proof-gate:
+    name: proof-gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Proof section in PR body
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const core = require('@actions/core');
+
+            const pr = context.payload.pull_request;
+            const body = (pr && pr.body) ? pr.body : '';
+
+            const required = [
+              { name: '## Proof heading', re: /(^|\n)##\s+Proof\b/i },
+              { name: 'Tests:',          re: /(^|\n)\s*Tests?\s*:\s*\S+/i },
+              { name: 'Evidence:',       re: /(^|\n)\s*Evidence\s*:\s*\S+/i },
+              { name: 'Risk:',           re: /(^|\n)\s*Risk\s*:\s*\S+/i },
+            ];
+
+            const missing = required.filter(r => !r.re.test(body)).map(r => r.name);
+
+            if (missing.length) {
+              core.setFailed(
+                `Missing required Proof fields: ${missing.join(', ')}.\n` +
+                `Open the PR description and fill the section "## Proof" (Tests / Evidence / Risk).`
+              );
+            } else {
+              console.log('Proof gate passed.');
+            }
