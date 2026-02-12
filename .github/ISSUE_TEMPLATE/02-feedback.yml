@@ -1,0 +1,33 @@
+name: Feedback (already covered / friction)
+description: Collect feedback after showing the demo.
+title: "[Feedback] <short>"
+labels: []
+body:
+  - type: dropdown
+    id: covered
+    attributes:
+      label: "Already covered"?
+      options:
+        - "No"
+        - "Partially"
+        - "Yes"
+    validations:
+      required: true
+  - type: dropdown
+    id: friction
+    attributes:
+      label: Estimated friction to fill Proof
+      options:
+        - "< 30s"
+        - "30–60s"
+        - "1–2 min"
+        - "> 2 min"
+    validations:
+      required: true
+  - type: textarea
+    id: proof_min
+    attributes:
+      label: Minimal Proof you would accept
+      placeholder: What 2–4 fields would be enough?
+    validations:
+      required: true
